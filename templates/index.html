@@ -1,26 +1,45 @@
-
+```html
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#07070b">
-    <meta name="description" content="وب‌سایت شخصی دانیال؛ طراحی سایت، برنامه‌نویسی و پروژه‌های خلاقانه.">
 
-    <meta name="google-site-verification" content="g2DVwDfo2FIlMepqdZyTQtQneKFEKIeIxo-9c7Nkzbw" />
+    <meta name="theme-color" content="#07070b">
+    <meta
+        name="description"
+        content="وب‌سایت شخصی دانیال؛ طراحی سایت، برنامه‌نویسی و پروژه‌های خلاقانه."
+    >
+
+    <meta
+        name="google-site-verification"
+        content="g2DVwDfo2FIlMepqdZyTQtQneKFEKIeIxo-9c7Nkzbw"
+    >
 
     <title>Danial | نمونه‌کارهای شخصی</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Main CSS -->
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
 </head>
 
 <body>
 
 <header>
     <nav class="navbar">
-        <a href="#home" class="logo">Danial<span>.</span></a>
+
+        <a href="#home" class="logo" aria-label="صفحه اصلی">
+            Danial<span>.</span>
+        </a>
 
         <div class="nav-links">
             <a href="#home">خانه</a>
@@ -29,12 +48,19 @@
             <a href="#projects">نمونه‌کارها</a>
             <a href="#contact">ارتباط</a>
         </div>
+
     </nav>
 </header>
 
+
 <main>
 
+    <!-- =========================
+         HERO
+    ========================== -->
+
     <section id="home" class="hero">
+
         <div class="profile-box">
             <img
                 src="{{ url_for('static', filename='images/profile.jpg') }}"
@@ -43,152 +69,537 @@
         </div>
 
         <div class="hero-content">
-            <p class="subtitle">به وب‌سایت شخصی من خوش آمدید</p>
 
-            <h1>سلام، من <span>دانیال</span> هستم</h1>
+            <p class="subtitle">
+                <i class="fa-solid fa-code" aria-hidden="true"></i>
+                به وب‌سایت شخصی من خوش آمدید
+            </p>
 
-            <p>طراحی سایت و پروژه‌های خلاقانه</p>
+            <h1>
+                سلام، من
+                <span>دانیال</span>
+                هستم
+            </h1>
 
-            <a href="#projects" class="btn">
-                مشاهده نمونه‌کارها
-                <i class="fa-solid fa-arrow-left"></i>
-            </a>
+            <p class="hero-description">
+                طراحی سایت، برنامه‌نویسی و ساخت پروژه‌های خلاقانه
+                با تمرکز روی ظاهر مدرن و تجربه کاربری خوب.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#projects" class="btn">
+                    مشاهده نمونه‌کارها
+                    <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                </a>
+
+                <a href="#contact" class="btn btn-outline">
+                    ارتباط با من
+                    <i class="fa-regular fa-paper-plane" aria-hidden="true"></i>
+                </a>
+
+            </div>
+
+            <div class="hero-tech">
+
+                <span>
+                    <i class="fa-brands fa-html5" aria-hidden="true"></i>
+                    HTML
+                </span>
+
+                <span>
+                    <i class="fa-brands fa-css3-alt" aria-hidden="true"></i>
+                    CSS
+                </span>
+
+                <span>
+                    <i class="fa-brands fa-js" aria-hidden="true"></i>
+                    JavaScript
+                </span>
+
+                <span>
+                    <i class="fa-brands fa-python" aria-hidden="true"></i>
+                    Python
+                </span>
+
+            </div>
+
         </div>
+
     </section>
+
+
+    <!-- =========================
+         ABOUT
+    ========================== -->
 
     <section id="about" class="section">
-        <h2>درباره من</h2>
-        <p>
-            من دانیال هستم و به طراحی سایت، برنامه‌نویسی
-            و ساخت پروژه‌های خلاقانه علاقه دارم.
-            هدفم ساخت وب‌سایت‌های زیبا و کاربردی است.
-        </p>
+
+        <div class="section-heading">
+
+            <span class="section-number">01</span>
+
+            <h2>درباره من</h2>
+
+            <p>
+                بیشتر درباره من و کاری که انجام می‌دهم
+            </p>
+
+        </div>
+
+        <div class="about-content">
+
+            <div class="about-card">
+
+                <div class="about-icon">
+                    <i class="fa-solid fa-user" aria-hidden="true"></i>
+                </div>
+
+                <h3>سلام 👋</h3>
+
+                <p>
+                    من دانیال هستم و به طراحی سایت، برنامه‌نویسی
+                    و ساخت پروژه‌های خلاقانه علاقه دارم.
+                    هدفم ساخت وب‌سایت‌هایی زیبا، سریع و کاربردی است.
+                </p>
+
+            </div>
+
+            <div class="about-card">
+
+                <div class="about-icon">
+                    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>
+                </div>
+
+                <h3>هدف من</h3>
+
+                <p>
+                    یادگیری مداوم، ساخت پروژه‌های جدید و تبدیل
+                    ایده‌های مختلف به پروژه‌های واقعی و قابل استفاده.
+                </p>
+
+            </div>
+
+        </div>
+
     </section>
+
+
+    <!-- =========================
+         SKILLS
+    ========================== -->
 
     <section id="skills" class="section">
-        <h2>مهارت‌های من</h2>
-        <p>برخی از مهارت‌ها و ابزارهایی که با آن‌ها کار می‌کنم:</p>
+
+        <div class="section-heading">
+
+            <span class="section-number">02</span>
+
+            <h2>مهارت‌های من</h2>
+
+            <p>
+                تکنولوژی‌ها و ابزارهایی که با آن‌ها کار می‌کنم
+            </p>
+
+        </div>
+
 
         <div class="projects-grid skills-grid">
+
             <div class="project-card skill-card">
-                <i class="fa-brands fa-html5" aria-hidden="true"></i>
+
+                <i
+                    class="fa-brands fa-html5"
+                    aria-hidden="true"
+                ></i>
+
                 <h3>HTML</h3>
-                <p>ساختار صفحات وب</p>
+
+                <p>
+                    ساختار صفحات وب و طراحی ساختار استاندارد
+                </p>
+
+                <span class="skill-tag">Web</span>
+
             </div>
 
+
             <div class="project-card skill-card">
-                <i class="fa-brands fa-css3-alt" aria-hidden="true"></i>
+
+                <i
+                    class="fa-brands fa-css3-alt"
+                    aria-hidden="true"
+                ></i>
+
                 <h3>CSS</h3>
-                <p>طراحی ظاهر و رابط کاربری</p>
+
+                <p>
+                    طراحی ظاهر، انیمیشن و رابط کاربری مدرن
+                </p>
+
+                <span class="skill-tag">Design</span>
+
             </div>
 
+
             <div class="project-card skill-card">
-                <i class="fa-brands fa-js" aria-hidden="true"></i>
+
+                <i
+                    class="fa-brands fa-js"
+                    aria-hidden="true"
+                ></i>
+
                 <h3>JavaScript</h3>
-                <p>ساخت امکانات تعاملی</p>
+
+                <p>
+                    ساخت امکانات تعاملی و پویا برای سایت
+                </p>
+
+                <span class="skill-tag">Interactive</span>
+
             </div>
 
+
             <div class="project-card skill-card">
-                <i class="fa-brands fa-python" aria-hidden="true"></i>
+
+                <i
+                    class="fa-brands fa-python"
+                    aria-hidden="true"
+                ></i>
+
                 <h3>Python</h3>
-                <p>برنامه‌نویسی و ساخت پروژه</p>
+
+                <p>
+                    برنامه‌نویسی و ساخت پروژه‌های کاربردی
+                </p>
+
+                <span class="skill-tag">Programming</span>
+
             </div>
 
+
             <div class="project-card skill-card">
-                <i class="fa-solid fa-server" aria-hidden="true"></i>
+
+                <i
+                    class="fa-solid fa-server"
+                    aria-hidden="true"
+                ></i>
+
                 <h3>Flask</h3>
-                <p>ساخت وب‌سایت با پایتون</p>
+
+                <p>
+                    ساخت وب‌سایت و برنامه‌های وب با پایتون
+                </p>
+
+                <span class="skill-tag">Backend</span>
+
             </div>
 
+
             <div class="project-card skill-card">
-                <i class="fa-solid fa-code" aria-hidden="true"></i>
+
+                <i
+                    class="fa-solid fa-code"
+                    aria-hidden="true"
+                ></i>
+
                 <h3>طراحی سایت</h3>
-                <p>ساخت وب‌سایت‌های مدرن</p>
+
+                <p>
+                    ساخت وب‌سایت‌های مدرن، واکنش‌گرا و کاربردی
+                </p>
+
+                <span class="skill-tag">Frontend</span>
+
             </div>
+
         </div>
+
     </section>
 
+
+    <!-- =========================
+         PROJECTS
+    ========================== -->
+
     <section id="projects" class="section">
-        <h2>نمونه‌کارهای من</h2>
-        <p>پروژه‌ها و تمرین‌های من را مشاهده کنید.</p>
+
+        <div class="section-heading">
+
+            <span class="section-number">03</span>
+
+            <h2>نمونه‌کارهای من</h2>
+
+            <p>
+                پروژه‌ها و تمرین‌هایی که ساخته‌ام
+            </p>
+
+        </div>
+
 
         <div class="projects-grid">
-            <article class="project-card">
-                <img
-                    src="{{ url_for('static', filename='images/project1.jpg.webp') }}"
-                    alt="تصویر پروژه اول"
-                    loading="lazy"
-                >
 
-                <h3>وب‌سایت شخصی Danial</h3>
-                <p>طراحی یک وب‌سایت شخصی با تم مشکی و بنفش، بخش مهارت‌ها و راه‌های ارتباطی.</p>
+            <!-- Project 1 -->
+
+            <article class="project-card">
+
+                <div class="project-image">
+
+                    <img
+                        src="{{ url_for('static', filename='images/project1.jpg.webp') }}"
+                        alt="تصویر پروژه وب‌سایت شخصی Danial"
+                        loading="lazy"
+                    >
+
+                    <div class="project-overlay">
+                        <i
+                            class="fa-solid fa-arrow-up-right-from-square"
+                            aria-hidden="true"
+                        ></i>
+                    </div>
+
+                </div>
+
+                <div class="project-content">
+
+                    <span class="project-category">
+                        <i class="fa-solid fa-globe" aria-hidden="true"></i>
+                        Website
+                    </span>
+
+                    <h3>
+                        وب‌سایت شخصی Danial
+                    </h3>
+
+                    <p>
+                        طراحی یک وب‌سایت شخصی با تم مشکی و بنفش،
+                        بخش مهارت‌ها، نمونه‌کارها و راه‌های ارتباطی.
+                    </p>
+
+                    <div class="project-tech">
+
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>Flask</span>
+
+                    </div>
+
+                    <a
+                        href="https://github.com/danialshikhi2009-afk/DanialPortfolio"
+                        class="btn"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <i
+                            class="fa-brands fa-github"
+                            aria-hidden="true"
+                        ></i>
+
+                        مشاهده کد پروژه
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- Project 2 -->
+
+            <article class="project-card">
+
+                <div class="project-placeholder">
+                    <span>02</span>
+
+                    <i
+                        class="fa-solid fa-rocket"
+                        aria-hidden="true"
+                    ></i>
+                </div>
+
+                <div class="project-content">
+
+                    <span class="project-category">
+                        <i
+                            class="fa-solid fa-flask"
+                            aria-hidden="true"
+                        ></i>
+                        Coming Soon
+                    </span>
+
+                    <h3>
+                        پروژه دوم
+                    </h3>
+
+                    <p>
+                        این بخش برای پروژه بعدی من آماده شده است
+                        و به‌زودی یک پروژه جدید در آن قرار می‌گیرد.
+                    </p>
+
+                    <span class="project-status">
+                        به‌زودی
+                    </span>
+
+                </div>
+
+            </article>
+
+
+            <!-- Project 3 -->
+
+            <article class="project-card">
+
+                <div class="project-placeholder">
+                    <span>03</span>
+
+                    <i
+                        class="fa-solid fa-code"
+                        aria-hidden="true"
+                    ></i>
+                </div>
+
+                <div class="project-content">
+
+                    <span class="project-category">
+                        <i
+                            class="fa-solid fa-clock"
+                            aria-hidden="true"
+                        ></i>
+                        Coming Soon
+                    </span>
+
+                    <h3>
+                        پروژه سوم
+                    </h3>
+
+                    <p>
+                        در آینده یک پروژه جدید و خلاقانه
+                        در این قسمت قرار خواهد گرفت.
+                    </p>
+
+                    <span class="project-status">
+                        به‌زودی
+                    </span>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CONTACT
+    ========================== -->
+
+    <section id="contact" class="section contact-section">
+
+        <div class="section-heading">
+
+            <span class="section-number">04</span>
+
+            <h2>ارتباط با من</h2>
+
+            <p>
+                برای همکاری یا پرسیدن سؤال می‌توانید پیام دهید.
+            </p>
+
+        </div>
+
+
+        <div class="contact-box">
+
+            <div class="contact-icon">
+                <i
+                    class="fa-regular fa-paper-plane"
+                    aria-hidden="true"
+                ></i>
+            </div>
+
+            <h3>
+                آماده همکاری هستم 🚀
+            </h3>
+
+            <p>
+                اگر ایده یا پروژه‌ای دارید،
+                می‌توانید از طریق یکی از راه‌های زیر با من در ارتباط باشید.
+            </p>
+
+
+            <div class="contact-buttons">
 
                 <a
-                    href="https://github.com/danialshikhi2009-afk/DanialPortfolio"
+                    href="https://t.me/Danial_7491"
                     class="btn"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    <i class="fa-brands fa-github" aria-hidden="true"></i>
-                    مشاهده کد پروژه
+                    <i
+                        class="fa-brands fa-telegram"
+                        aria-hidden="true"
+                    ></i>
+
+                    تلگرام
                 </a>
-            </article>
 
-            <article class="project-card">
-                <div class="project-placeholder">02</div>
-                <h3>پروژه دوم</h3>
-                <p>این بخش برای پروژه بعدی من آماده شده است.</p>
-                <span class="project-status">به‌زودی</span>
-            </article>
 
-            <article class="project-card">
-                <div class="project-placeholder">03</div>
-                <h3>پروژه سوم</h3>
-                <p>در آینده یک پروژه جدید در این قسمت قرار می‌گیرد.</p>
-                <span class="project-status">به‌زودی</span>
-            </article>
+                <a
+                    href="https://wa.me/989170738890"
+                    class="btn"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <i
+                        class="fa-brands fa-whatsapp"
+                        aria-hidden="true"
+                    ></i>
+
+                    واتساپ
+                </a>
+
+            </div>
+
         </div>
-    </section>
 
-    <section id="contact" class="section">
-        <h2>ارتباط با من</h2>
-        <p>برای همکاری یا پرسیدن سؤال می‌توانید پیام دهید.</p>
-
-        <div class="contact-buttons">
-            <a
-                href="https://t.me/Danial_7491"
-                class="btn"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                <i class="fa-brands fa-telegram" aria-hidden="true"></i>
-                تلگرام
-            </a>
-
-            <a
-                href="https://wa.me/989170738890"
-                class="btn"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-                واتساپ
-            </a>
-        </div>
     </section>
 
 </main>
 
+
+<!-- =========================
+     FOOTER
+========================== -->
+
 <footer>
-    <p>© 2026 Danial | تمام حقوق محفوظ است.</p>
+
+    <p>
+        © 2026 Danial | تمام حقوق محفوظ است.
+    </p>
 
     <div class="footer-actions">
-        <button type="button" id="shareSite" class="btn">
-            <i class="fa-solid fa-share-nodes" aria-hidden="true"></i>
+
+        <button
+            type="button"
+            id="shareSite"
+            class="btn"
+        >
+            <i
+                class="fa-solid fa-share-nodes"
+                aria-hidden="true"
+            ></i>
+
             اشتراک‌گذاری سایت
         </button>
+
     </div>
+
 </footer>
+
+
+<!-- =========================
+     BACK TO TOP
+========================== -->
 
 <button
     type="button"
@@ -197,10 +608,16 @@
     aria-label="بازگشت به بالای صفحه"
     title="بازگشت به بالا"
 >
-    <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+    <i
+        class="fa-solid fa-arrow-up"
+        aria-hidden="true"
+    ></i>
 </button>
 
+
+<!-- JavaScript -->
 <script src="{{ url_for('static', filename='script.js') }}"></script>
 
 </body>
 </html>
+```
