@@ -11,22 +11,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const targetId = link.getAttribute("href");
 
-            if (targetId && targetId.length > 1) {
-
-                const target = document.querySelector(targetId);
-
-                if (target) {
-
-                    event.preventDefault();
-
-                    target.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start"
-                    });
-
-                }
+            if (!targetId || targetId === "#") {
+                return;
             }
+
+            const target = document.querySelector(targetId);
+
+            if (!target) {
+                return;
+            }
+
+            event.preventDefault();
+
+            target.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
         });
+
     });
 
 
@@ -50,6 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         entry.target.classList.add("visible");
 
                         revealObserver.unobserve(entry.target);
+
                     }
 
                 });
@@ -64,17 +68,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
             element.classList.add("reveal");
 
-            /*
-             * کمی تأخیر برای کارت‌ها
-             * باعث می‌شود کارت‌ها یکی‌یکی ظاهر شوند.
-             */
-
             if (
                 element.classList.contains("project-card") ||
                 element.classList.contains("about-card")
             ) {
+
                 element.style.transitionDelay =
                     `${Math.min(index * 0.08, 0.4)}s`;
+
             }
 
             revealObserver.observe(element);
@@ -83,12 +84,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     } else {
 
-        /*
-         * مرورگرهای قدیمی
-         */
-
         revealElements.forEach(function (element) {
+
             element.classList.add("visible");
+
         });
 
     }
@@ -98,46 +97,65 @@ document.addEventListener("DOMContentLoaded", function () {
        SHARE WEBSITE
     ========================== */
 
-    const shareButton = document.getElementById("shareSite");
+    const shareButton =
+        document.getElementById("shareSite");
 
     if (shareButton) {
 
-        shareButton.addEventListener("click", async function () {
+        shareButton.addEventListener(
+            "click",
+            async function () {
 
-            const siteLink = window.location.href;
+                const siteLink =
+                    window.location.origin;
 
-            const shareData = {
-                title: "Danial | نمونه‌کارهای شخصی",
-                text: "وب‌سایت شخصی دانیال؛ طراحی سایت و پروژه‌های خلاقانه",
-                url: siteLink
-            };
+                const shareData = {
+                    title: "Danial | نمونه‌کارهای شخصی",
+                    text:
+                        "وب‌سایت شخصی دانیال؛ طراحی سایت و پروژه‌های خلاقانه",
+                    url: siteLink
+                };
 
-            try {
+                try {
 
-                if (navigator.share) {
+                    /*
+                     * موبایل‌هایی که Web Share API دارند
+                     */
+                    if (
+                        navigator.share &&
+                        typeof navigator.share === "function"
+                    ) {
 
-                    await navigator.share(shareData);
+                        await navigator.share(shareData);
 
-                } else {
+                        return;
+                    }
 
+                    /*
+                     * اگر Share API وجود نداشت،
+                     * لینک را کپی می‌کنیم.
+                     */
                     await copySiteLink(siteLink);
 
-                }
+                } catch (error) {
 
-            } catch (error) {
+                    /*
+                     * بستن پنجره Share توسط کاربر
+                     * خطا محسوب نمی‌شود.
+                     */
+                    if (
+                        !error ||
+                        error.name !== "AbortError"
+                    ) {
 
-                /*
-                 * اگر کاربر پنجره Share را بست،
-                 * پیام خطا نمایش نمی‌دهیم.
-                 */
+                        await copySiteLink(siteLink);
 
-                if (error.name !== "AbortError") {
-                    await copySiteLink(siteLink);
+                    }
+
                 }
 
             }
-
-        });
+        );
 
     }
 
@@ -148,6 +166,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     async function copySiteLink(link) {
 
+        /*
+         * روش اصلی
+         */
         try {
 
             if (
@@ -159,17 +180,61 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 showToast("لینک سایت کپی شد ✓");
 
-                return;
+                return true;
+
             }
 
         } catch (error) {
-            // روش جایگزین پایین اجرا می‌شود.
+            // روش جایگزین اجرا می‌شود.
         }
 
+
+        /*
+         * روش جایگزین برای مرورگرهای قدیمی
+         */
+        try {
+
+            const textArea =
+                document.createElement("textarea");
+
+            textArea.value = link;
+
+            textArea.style.position = "fixed";
+            textArea.style.opacity = "0";
+            textArea.style.pointerEvents = "none";
+
+            document.body.appendChild(textArea);
+
+            textArea.focus();
+            textArea.select();
+
+            const copied =
+                document.execCommand("copy");
+
+            textArea.remove();
+
+            if (copied) {
+
+                showToast("لینک سایت کپی شد ✓");
+
+                return true;
+
+            }
+
+        } catch (error) {
+            // روش نهایی پایین اجرا می‌شود.
+        }
+
+
+        /*
+         * روش نهایی
+         */
         window.prompt(
             "لینک سایت رو انتخاب و کپی کن:",
             link
         );
+
+        return false;
     }
 
 
@@ -179,13 +244,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function showToast(message) {
 
-        const oldToast = document.querySelector(".site-toast");
+        const oldToast =
+            document.querySelector(".site-toast");
 
         if (oldToast) {
             oldToast.remove();
         }
 
-        const toast = document.createElement("div");
+        const toast =
+            document.createElement("div");
 
         toast.className = "site-toast";
 
@@ -194,7 +261,9 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.appendChild(toast);
 
         requestAnimationFrame(function () {
+
             toast.classList.add("show");
+
         });
 
         setTimeout(function () {
@@ -202,10 +271,15 @@ document.addEventListener("DOMContentLoaded", function () {
             toast.classList.remove("show");
 
             setTimeout(function () {
-                toast.remove();
+
+                if (toast.parentNode) {
+                    toast.remove();
+                }
+
             }, 300);
 
         }, 2500);
+
     }
 
 
@@ -232,6 +306,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         }
 
+
         window.addEventListener(
             "scroll",
             updateBackToTopButton,
@@ -240,7 +315,9 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         );
 
+
         updateBackToTopButton();
+
 
         backToTopButton.addEventListener(
             "click",
@@ -261,13 +338,15 @@ document.addEventListener("DOMContentLoaded", function () {
        ACTIVE NAVIGATION
     ========================== */
 
-    const sections = document.querySelectorAll(
-        "main section[id]"
-    );
+    const sections =
+        document.querySelectorAll(
+            "main section[id]"
+        );
 
-    const navLinks = document.querySelectorAll(
-        ".nav-links a"
-    );
+    const navLinks =
+        document.querySelectorAll(
+            ".nav-links a"
+        );
 
     if (
         "IntersectionObserver" in window &&
@@ -281,37 +360,44 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     entries.forEach(function (entry) {
 
-                        if (entry.isIntersecting) {
-
-                            const currentId =
-                                entry.target.getAttribute("id");
-
-                            navLinks.forEach(function (link) {
-
-                                link.classList.remove("active");
-
-                                if (
-                                    link.getAttribute("href") ===
-                                    `#${currentId}`
-                                ) {
-                                    link.classList.add("active");
-                                }
-
-                            });
-
+                        if (!entry.isIntersecting) {
+                            return;
                         }
+
+                        const currentId =
+                            entry.target.getAttribute("id");
+
+                        navLinks.forEach(function (link) {
+
+                            link.classList.remove("active");
+
+                            if (
+                                link.getAttribute("href") ===
+                                `#${currentId}`
+                            ) {
+
+                                link.classList.add("active");
+
+                            }
+
+                        });
 
                     });
 
                 },
                 {
-                    rootMargin: "-35% 0px -55% 0px",
+                    rootMargin:
+                        "-35% 0px -55% 0px",
+
                     threshold: 0
                 }
             );
 
+
         sections.forEach(function (section) {
+
             sectionObserver.observe(section);
+
         });
 
     }
@@ -321,39 +407,61 @@ document.addEventListener("DOMContentLoaded", function () {
        BUTTON RIPPLE EFFECT
     ========================== */
 
-    document.querySelectorAll(".btn").forEach(function (button) {
+    document.querySelectorAll(".btn").forEach(
+        function (button) {
 
-        button.addEventListener("click", function (event) {
+            button.addEventListener(
+                "click",
+                function (event) {
 
-            const ripple =
-                document.createElement("span");
+                    const ripple =
+                        document.createElement("span");
 
-            ripple.className = "button-ripple";
+                    ripple.className =
+                        "button-ripple";
 
-            const rect =
-                button.getBoundingClientRect();
 
-            const size =
-                Math.max(rect.width, rect.height);
+                    const rect =
+                        button.getBoundingClientRect();
 
-            ripple.style.width = `${size}px`;
-            ripple.style.height = `${size}px`;
 
-            ripple.style.left =
-                `${event.clientX - rect.left - size / 2}px`;
+                    const size =
+                        Math.max(
+                            rect.width,
+                            rect.height
+                        );
 
-            ripple.style.top =
-                `${event.clientY - rect.top - size / 2}px`;
 
-            button.appendChild(ripple);
+                    ripple.style.width =
+                        `${size}px`;
 
-            setTimeout(function () {
-                ripple.remove();
-            }, 600);
+                    ripple.style.height =
+                        `${size}px`;
 
-        });
 
-    });
+                    ripple.style.left =
+                        `${event.clientX - rect.left - size / 2}px`;
+
+                    ripple.style.top =
+                        `${event.clientY - rect.top - size / 2}px`;
+
+
+                    button.appendChild(ripple);
+
+
+                    setTimeout(function () {
+
+                        if (ripple.parentNode) {
+                            ripple.remove();
+                        }
+
+                    }, 600);
+
+                }
+            );
+
+        }
+    );
 
 
     /* =========================
@@ -361,7 +469,9 @@ document.addEventListener("DOMContentLoaded", function () {
     ========================== */
 
     const projectImages =
-        document.querySelectorAll(".project-image img");
+        document.querySelectorAll(
+            ".project-image img"
+        );
 
     projectImages.forEach(function (image) {
 
@@ -374,7 +484,9 @@ document.addEventListener("DOMContentLoaded", function () {
             image.addEventListener(
                 "load",
                 function () {
+
                     image.classList.add("loaded");
+
                 }
             );
 
@@ -391,6 +503,7 @@ document.addEventListener("DOMContentLoaded", function () {
         window.matchMedia(
             "(prefers-reduced-motion: reduce)"
         );
+
 
     if (prefersReducedMotion.matches) {
 
